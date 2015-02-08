@@ -31,7 +31,6 @@ public abstract class Pipe
   public static void runCommand(String command)
   {
     try {
-      System.out.println(command);
       Process process = Runtime.getRuntime().exec(command);
       process.getOutputStream().flush();
       process.getOutputStream().close();

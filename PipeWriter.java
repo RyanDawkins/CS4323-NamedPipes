@@ -12,7 +12,8 @@ public class PipeWriter extends Pipe
 
   public void write(String message)
   {
-    runCommand("printf "+message+" > "+this.getPipeName());
+    runCommand("printf \""+message+"\" > "+this.getPipeName());
+    System.out.println("printf \""+message+"\" > "+this.getPipeName());
   }
 
 }

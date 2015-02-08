@@ -1,4 +1,4 @@
-public class Server
+public class Server extends HomeworkOne
 {
 
   public static String OUTPUT = "rdawkin-server";
@@ -13,13 +13,12 @@ public class Server
 
     while(true) {
 
-      System.out.print("Recieved: ");
+      System.out.print("Server : PID "+getProcessId()+" - Recieved: ");
       String message = pr.read();
       System.out.println(message);
       System.out.print("Response: ");
       if(message.equals("Hello")) {
         pw.write("Hi");
-        System.out.println("Hi");
       } else {
         System.out.println();
       }
