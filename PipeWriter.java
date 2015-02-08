@@ -12,12 +12,7 @@ public class PipeWriter extends Pipe
 
   public void write(String message)
   {
-    try {
-      Process process = Runtime.getRuntime().exec(message+" > "+this.getPipeName());
-      process.getOutputStream().flush();
-      process.getOutputStream().close();
-    } catch(IOException exception) {
-    }
+    runCommand("printf "+message+" > "+this.getPipeName());
   }
 
 }

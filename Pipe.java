@@ -19,9 +19,9 @@ public abstract class Pipe
   {
     this.setPipeName(pipeName);
 
-    if( !this.pipeExists(this.pipeName) )
+    if( !this.pipeExists(this.getPipeName()) )
     {
-      //throw new PipeDoesNotExistException(this.pipeName);
+      throw new PipeDoesNotExistException(this.pipeName);
     }
   }
 
@@ -35,7 +35,11 @@ public abstract class Pipe
       Process process = Runtime.getRuntime().exec(command);
       process.getOutputStream().flush();
       process.getOutputStream().close();
-    } catch(IOException exception) {
+      process.waitFor();
+    } catch(IOException e) {
+      e.printStackTrace();
+    } catch(InterruptedException e){
+      e.printStackTrace();
     }
   }
 
@@ -48,9 +52,14 @@ public abstract class Pipe
    * Closes the pipe using the rm command
    *
    */
-  public void closePipe()
+  public void close()
   {
-    this.runCommand("rm "+this.getPipeName());
+    close(this.getPipeName());
+  }
+
+  public static void close(String pipeName)
+  {
+    runCommand("rm "+pipeName);
   }
 
   /**

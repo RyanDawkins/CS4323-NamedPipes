@@ -22,6 +22,8 @@ public class PipeReader extends Pipe
     String pipeOutput = "";
     try {
       Process process = Runtime.getRuntime().exec("cat "+this.getPipeName());
+      process.getOutputStream().flush();
+      process.waitFor();
 
       BufferedReader in = new BufferedReader(
         new InputStreamReader(process.getInputStream())
@@ -30,6 +32,8 @@ public class PipeReader extends Pipe
       String line;
       while((line = in.readLine()) != null) { pipeOutput += line + "\n"; }
     } catch(IOException exception) {
+    } catch(InterruptedException e){
+      e.printStackTrace();
     }
 
     return pipeOutput.trim();
