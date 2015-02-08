@@ -15,7 +15,7 @@ public class Server extends HomeworkOne
 
       System.out.print("Server : PID "+getProcessId()+" - Recieved: ");
       String message = pr.read();
-      System.out.println(message);
+      
       System.out.print("Response: ");
       if(message.equals("Hello")) {
         pw.write("Hi");

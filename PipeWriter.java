@@ -1,5 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 public class PipeWriter extends Pipe
@@ -12,8 +14,19 @@ public class PipeWriter extends Pipe
 
   public void write(String message)
   {
-    runCommand("printf \""+message+"\" > "+this.getPipeName());
-    System.out.println("printf \""+message+"\" > "+this.getPipeName());
+    try {
+      BufferedWriter bf = new BufferedWriter(
+        new OutputStreamWriter(
+          new FileOutputStream(new File(this.getPipeName()))
+        )
+      );
+      bf.write(message);
+      bf.flush();
+      bf.close();
+    } catch(IOException e) {
+
+    }
+
   }
 
 }
