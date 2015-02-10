@@ -1,3 +1,0 @@
-rm rdawkin-*
-javac Server.java
-java Server
